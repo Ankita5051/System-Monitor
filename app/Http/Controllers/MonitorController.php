@@ -84,7 +84,7 @@ class MonitorController extends Controller
     
     public function getAllMetrics()
     {
-        $metrics = DB::table('metrics')->orderBy('created_at', 'desc')->limit(10)->get();
+        $metrics = DB::table('metrics')->orderBy('created_at', 'desc')->get();
         return response()->json($metrics);
     }
     private function getCpuUsage()

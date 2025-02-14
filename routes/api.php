@@ -9,6 +9,16 @@ Route::post('/metadata', [MonitorController::class, 'setMetadata']);
 Route::get('/metadata', [MonitorController::class, 'getMetadata']);
 Route::get('/alerts', [MonitorController::class, 'getAlerts']);
 Route::get('/metrics/history',[MonitorController::class, 'getAllMetrics']);
+
+
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Invalid URL. Redirecting to home...',
+        'status' => 404
+    ], 404)->header('Location', url('/'));
+});
+
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
