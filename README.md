@@ -70,10 +70,10 @@ GET /api/metrics
 **Response:**
 ```json
 {
-    "cpu": "45.3%",
-    "memory": "1024MB",
-    "disk": "75% Used",
-    "timestamp": "2025-02-14 12:00:00"
+"cpu":"14%",
+"memory":"20MB",
+"disk":"81.37% Used",
+"timestamp":"2025-02-14T19:50:24.919319Z"
 }
 ```
 
@@ -84,9 +84,29 @@ GET /api/metrics/history
 **Response:**
 ```json
 [
-  {"cpu": "45.3%", "memory": "1024MB", "disk": "75%", "timestamp": "2025-02-14 12:00:00"},
-  {"cpu": "50.1%", "memory": "1050MB", "disk": "70%", "timestamp": "2025-02-14 12:05:00"}
+{"id":8,"cpu_usage":16,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:56:47"},{"id":7,"cpu_usage":13,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:56:44"},{"id":6,"cpu_usage":19,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:56:37"},{"id":5,"cpu_usage":6,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:55:37"},{"id":4,"cpu_usage":5,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:54:37"},{"id":3,"cpu_usage":14,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:53:37"},{"id":2,"cpu_usage":3,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:53:13"},{"id":1,"cpu_usage":13,"memory_usage":20,"disk_usage":81.46,"created_at":"2025-02-14 17:52:37"}
 ]
+
+```
+
+### **2. Fetch Historical Metrics**
+```http
+GET /api/metadata
+```
+**Response:**
+```json
+
+[
+{
+"id":1,
+"server_name":"Server -A",
+"environment":"Production",
+"location":"India",
+"created_at":"2025-02-14 20:01:03",
+"updated_at":"2025-02-14 20:01:03"
+}
+]
+
 ```
 
 ### **3. Set Metadata**
@@ -96,17 +116,25 @@ POST /api/metadata
 **Request Body:**
 ```json
 {
-    "server_name": "Server-1",
+    "server_name": "Server-A",
     "environment": "Production",
-    "location": "Data Center 1"
+    "location": "India"
 }
 ```
 **Response:**
 ```json
 {
-    "message": "Metadata saved",
-    "data": { "id": 1, "server_name": "Server-1", "environment": "Production", "location": "Data Center 1" }
+"message":"Metadata saved",
+"data":{
+"server_name":"Server -A",
+"environment":"Production",
+"location":"India",
+"updated_at":"2025-02-14T19:58:12.000000Z",
+"created_at":"2025-02-14T19:58:12.000000Z",
+"id":1
 }
+}
+
 ```
 
 ### **4. Fetch Alerts**
@@ -116,8 +144,9 @@ GET /api/alerts
 **Response:**
 ```json
 [
-  {"metric": "CPU", "value": "85.2%", "threshold": "80%", "status": "active", "timestamp": "2025-02-14 12:10:00"}
+{"id":1,"metric":"CPU","value":21,"threshold":"80%","status":"active","created_at":"2025-02-14 19:54:47","updated_at":null},{"id":2,"metric":"CPU","value":21,"threshold":"80%","status":"active","created_at":"2025-02-14 19:54:50","updated_at":null},{"id":3,"metric":"CPU","value":34,"threshold":"80%","status":"active","created_at":"2025-02-14 19:54:55","updated_at":null}
 ]
+
 ```
 
 ---
