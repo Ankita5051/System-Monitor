@@ -1,9 +1,10 @@
-# System-heath-monitoring
-
 # System Health Monitoring & Alerting Tool
 
 ## Overview
 This tool monitors system health by tracking **CPU usage, memory usage, and disk usage**. It provides API endpoints to fetch system metrics, assign metadata, and trigger alerts when thresholds are exceeded.
+
+## Dashboard Preview
+![System Metrics Dashboard](./public/assets/dashboard.png)
 
 ## Features
 - **Real-time System Metrics**: CPU, Memory, Disk Usage
