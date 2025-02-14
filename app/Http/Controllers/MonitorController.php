@@ -27,7 +27,7 @@ class MonitorController extends Controller
             'created_at' => now(),
         ]);
 
-        if ($cpuUsage > 80) {
+        if ($cpuUsage > 10) {
             DB::table('alerts')->insert([
                 'metric' => 'CPU',
                 'value' => round($cpuUsage, 2),
