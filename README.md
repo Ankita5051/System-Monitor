@@ -1,5 +1,5 @@
 # System-heath-monitoring
->>>>>>> 5a2604ff894859b02825cb0672d1f4a095636fac
+
 # System Health Monitoring & Alerting Tool
 
 ## Overview

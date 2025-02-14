@@ -1,18 +1,3 @@
-{{-- <canvas id="metricsChart"></canvas>
-<script>
-fetch('/api/metrics').then(response => response.json()).then(data => {
-    new Chart(document.getElementById("metricsChart"), {
-        type: 'line',
-        data: {
-            labels: ['CPU', 'Memory', 'Disk'],
-            datasets: [{
-                data: [data.cpu, data.memory, data.disk],
-                backgroundColor: ['red', 'blue', 'green']
-            }]
-        }
-    });
-});
-</script> --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +41,7 @@ fetch('/api/metrics').then(response => response.json()).then(data => {
             <canvas id="diskChart"></canvas>
         </div>
     </div>
+
     <script>
         let cpuChart, memoryChart, diskChart;
     
@@ -85,21 +71,24 @@ fetch('/api/metrics').then(response => response.json()).then(data => {
             $.ajax({
                 url: "/api/metrics",
                 method: "GET",
+                dataType: "json",
                 success: function(data) {
+                    console.log("Metrics Data:", data); // Debugging line
+                    
                     const time = new Date().toLocaleTimeString();
-    
-                    addData(cpuChart, time, data.cpu_usage);
-                    addData(memoryChart, time, data.memory_usage);
-                    addData(diskChart, time, data.disk_usage);
+
+                    // Ensure the response data keys match the API response
+                    addData(cpuChart, time, parseFloat(data.cpu)); 
+                    addData(memoryChart, time, parseFloat(data.memory)); 
+                    addData(diskChart, time, parseFloat(data.disk));
                 },
-                error: function() {
-                    console.error("Failed to fetch metrics.");
+                error: function(xhr, status, error) {
+                    console.error("Failed to fetch metrics:", error);
                 }
             });
         }
     
         function addData(chart, label, value) {
-            // Keep only the last 5-6 timestamps
             if (chart.data.labels.length >= 6) {
                 chart.data.labels.shift();
                 chart.data.datasets[0].data.shift();
@@ -114,11 +103,10 @@ fetch('/api/metrics').then(response => response.json()).then(data => {
             memoryChart = createChart(document.getElementById("memoryChart"), "Memory Usage (%)", "blue");
             diskChart = createChart(document.getElementById("diskChart"), "Disk Usage (%)", "green");
     
-            fetchMetrics();  // Fetch initially
-            setInterval(fetchMetrics, 5000);  // Update every 5 seconds
+            fetchMetrics();
+            setInterval(fetchMetrics, 5000);
         });
     </script>
-    
 
 </body>
 </html>
