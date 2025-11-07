@@ -187,10 +187,4 @@ php artisan route:list
 ```
 
 ---
-## Credits
-Developed by **Ankita5051**
-
-If you found this project helpful, give it a ⭐ on GitHub!
-
----
 
